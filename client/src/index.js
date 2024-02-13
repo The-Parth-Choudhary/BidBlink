@@ -8,15 +8,19 @@ import { ConfigProvider } from 'antd';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <ConfigProvider theme={{
-            components: {
-                Button:{
-                    colorPrimary: "#40513b",
-                    colorPrimaryHover: "#40513b",
-                    borderRadius: "0px"
+        <ConfigProvider
+            theme={{
+                components: {
+                    Button: {
+                        colorPrimary: '#40513b',
+                        colorPrimaryHover: '#40513b',
+                        borderRadius: '0px'
+                    }
+                },
+                token: {
+                    borderRadius: '2px',
                 }
-            }
-        }}>
+            }}>
             <App />
         </ConfigProvider>
     </React.StrictMode>
