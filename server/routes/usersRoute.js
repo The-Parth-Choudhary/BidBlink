@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
 })
 
 //user login
-router.post('./login', async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         //check if user exist
         const user = await User.findOne({ email: req.body.email });
@@ -50,7 +50,7 @@ router.post('./login', async (req, res) => {
         }
 
         //create and assign token
-        const token = jwt.sign({ userId: user._id }, process.env.jwt_secret);
+        const token = jwt.sign({ userId: user._id }, process.env.jwt_secret, {expiresIn: '1d'});
 
         //send response
         res.send({
