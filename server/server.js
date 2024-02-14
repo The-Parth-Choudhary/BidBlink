@@ -5,8 +5,8 @@ require('dotenv').config();
 const dbConfig = require('./config/dbConfig');
 const port = process.env.Port || 5000;
 
-const usersRoute = require('./routes/userRoute');
-app.use('/api/user', usersRoute);
+const usersRoute = require('./routes/usersRoute');
+app.use('/api/users', usersRoute);
 
 app.listen(port, () => {
     console.log(`Node server started on port ${port}`);
