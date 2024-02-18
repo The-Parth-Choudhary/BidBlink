@@ -48,7 +48,9 @@ function ProtectedPage({ children }) {
 
                 <div className='bg-white py-2 px-5 rounded flex gap-1'>
                     <i className="ri-user-3-line"></i>
-                    <span className='cursor-pointer uppercase'>
+                    <span className='cursor-pointer uppercase' onClick={() => {
+                        navigate('/profile')
+                    }}>
                         {user.name}
                     </span>
                     <i className="ri-logout-box-r-line ml-10 cursor-pointer" onClick={() => {
