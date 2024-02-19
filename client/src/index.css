@@ -29,3 +29,12 @@ button{
     height: 45px;
     box-shadow: none !important;
 }
+
+table{
+    border: #a1a1a1 1px solid;
+    border-radius: 2px;
+}
+
+i{
+    font-size: 20px;
+}
