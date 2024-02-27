@@ -3,10 +3,12 @@ import React, { useEffect } from 'react'
 import ProductForm from './ProductForm';
 import { useDispatch } from 'react-redux';
 import { SetLoader } from '../../../redux/loadersSlice';
-import { GetProducts } from '../../../apicalls/products';
+import { DeleteProduct, GetProducts } from '../../../apicalls/products';
+import moment from 'moment';
 
 function Products() {
     const [products, setProducts] = React.useState([]);
+    const [selectedProduct, setSelectedProduct] = React.useState(null);
     const [showProductForm, setShowProductForm] = React.useState(false);
     const dispatch = useDispatch();
 
@@ -23,6 +25,24 @@ function Products() {
             message.error(error.message);
         }
     }
+
+    const deleteProduct = async (id) => {
+        try {
+            dispatch(SetLoader(true));
+            const response = await DeleteProduct(id);
+            dispatch(SetLoader(false));
+            if (response.success) {
+                message.success(response.message);
+                getData();
+            }
+            else {
+                message.error(response.message);
+            }
+        } catch (error) {
+            dispatch(SetLoader(false));
+            message.error(error.message);
+        }
+    };
 
     const columns = [
         {
@@ -50,12 +70,22 @@ function Products() {
             dataIndex: 'status'
         },
         {
+            title: 'Added on',
+            dataIndex: 'createdAt',
+            render: (text, record) => moment(record.createdAt).format('DD-MM-YYYY hh:mm A')
+        },
+        {
             title: 'Action',
             dataIndex: 'action',
             render: (text, record) => {
                 return <div className="flex gap-5">
-                    <i className="ri-delete-bin-line cursor-pointer"></i>
-                    <i className="ri-pencil-line cursor-pointer"></i>
+                    <i className="ri-delete-bin-line cursor-pointer" onClick={() => {
+                        deleteProduct(record._id);
+                    }}></i>
+                    <i className="ri-pencil-line cursor-pointer" onClick={() => {
+                        setSelectedProduct(record);
+                        setShowProductForm(true);
+                    }}></i>
                 </div>
             }
         }
@@ -68,12 +98,18 @@ function Products() {
     return (
         <div>
             <div className="flex justify-end mb-2">
-                <Button onClick={() => setShowProductForm(true)}>Add Product</Button>
+                <Button onClick={() => { setShowProductForm(true) }}>Add Product</Button>
             </div>
 
             <Table columns={columns} dataSource={products} />
 
-            <ProductForm showProductForm={showProductForm} setShowProductForm={setShowProductForm} />
+            <ProductForm
+                showProductForm={showProductForm}
+                setShowProductForm={setShowProductForm}
+                selectedProduct={selectedProduct}
+                getData={getData}
+                setSelectedProduct={setSelectedProduct}
+            />
         </div>
     )
 }

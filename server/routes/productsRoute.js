@@ -85,7 +85,7 @@ router.post('/upload-image-to-product', authMiddleware, multer({ storage: storag
         res.send({
             success: true,
             message: 'Image uploaded successfully',
-            result
+            data: result.secure_url
         })
     } catch (error) {
         res.send({
