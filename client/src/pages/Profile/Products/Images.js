@@ -11,6 +11,7 @@ function Images({ selectedProduct, getData, setShowProductForm }) {
     const upload = () => {
         try {
             dispatch(SetLoader(true));
+            
         } catch (error) {
             dispatch(SetLoader(false));
             message.error(error.message);
