@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Product = require('../models/productModel');
 const authMiddleware = require('../middlewares/authMiddleware');
-const { cloudinary_js_config } = require('../config/cloudinaryConfig');
+const cloudinary = require('../config/cloudinaryConfig');
 const multer = require('multer');
 
 // add new product
@@ -78,7 +78,7 @@ const storage = multer.diskStorage({
 
 router.post('/upload-image-to-product', authMiddleware, multer({ storage: storage }).single('file'), async (req, res) => {
     try {
-        const result = await cloudinary.uploader.upload(req.file.path);
+        const result = await cloudinary.uploader.upload(req.file.path, { folder: 'BidBlink' });
 
         const productId = req.body.productId;
         await Product.findByIdAndUpdate(productId, { $push: { images: result.secure_url } })
@@ -90,7 +90,7 @@ router.post('/upload-image-to-product', authMiddleware, multer({ storage: storag
     } catch (error) {
         res.send({
             success: false,
-            error: error.message
+            message: error.message
         })
     }
 })
