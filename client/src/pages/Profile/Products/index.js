@@ -99,7 +99,10 @@ function Products() {
     return (
         <div>
             <div className="flex justify-end mb-2">
-                <Button onClick={() => { setShowProductForm(true) }}>Add Product</Button>
+                <Button type='default' onClick={() => {
+                    setSelectedProduct(null);
+                    setShowProductForm(true)
+                }}>Add Product</Button>
             </div>
 
             <Table columns={columns} dataSource={products} />
