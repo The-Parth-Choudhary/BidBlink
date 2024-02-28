@@ -44,12 +44,17 @@ function ProtectedPage({ children }) {
         <div>
             {/* header */}
             <div className='flex justify-between items-center bg-primary p-5'>
-                <h1 className="text-2xl text-white">BidBlink</h1>
+                <h1 className="text-2xl text-white cursor-pointer" onClick={() => { navigate('/') }}>BidBlink</h1>
 
                 <div className='bg-white py-2 px-5 rounded flex gap-1'>
                     <i className="ri-user-3-line"></i>
                     <span className='cursor-pointer uppercase' onClick={() => {
-                        navigate('/profile')
+                        if (user.role === 'user') {
+                            navigate('/profile');
+                        }
+                        else {
+                            navigate('admin');
+                        }
                     }}>
                         {user.name}
                     </span>
