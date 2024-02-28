@@ -42,11 +42,21 @@ export const DeleteProduct = async (id) => {
 }
 
 // upload product image
-export const UploadProductImage = async(payload)=>{
+export const UploadProductImage = async (payload) => {
     try {
         const response = await axiosInstance.post('/api/products/upload-image-to-product', payload);
         return response.data;
     } catch (error) {
         return error.message
+    }
+}
+
+//update product status
+export const UpdateProductStatus = async (id, status) => {
+    try {
+        const response = await axiosInstance.put(`/api/products/update-product-status/${id}`, { status });
+        return response.data;
+    } catch (error) {
+        return error.message;
     }
 }

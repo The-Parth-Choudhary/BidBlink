@@ -52,7 +52,7 @@ const productSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: "Pending",
+        default: "pending",
         required: true
     }
 }, { timestamps: true });

@@ -100,4 +100,21 @@ router.post('/upload-image-to-product', authMiddleware, multer({ storage: storag
     }
 })
 
+// update product status
+router.put('/update-product-status/:id', authMiddleware, async (req, res) => {
+    try {
+        const { status } = req.body;
+        await Product.findByIdAndUpdate(req.params.id, { status });
+        res.send({
+            success: true,
+            message: 'Product status updated successfully'
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: error.message
+        })
+    }
+})
+
 module.exports = router
