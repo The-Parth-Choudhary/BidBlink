@@ -11,6 +11,16 @@ export const AddProduct = async (payload) => {
     }
 }
 
+// get product by id
+export const GetProductById = async (id) => {
+    try {
+        const response = await axiosInstance.get(`/api/products/get-product-by-id/${id}`);
+        return response.data;
+    } catch (error) {
+        return error.message
+    }
+}
+
 // get products
 export const GetProducts = async (filters) => {
     try {

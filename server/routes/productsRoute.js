@@ -21,6 +21,22 @@ router.post('/add-product', authMiddleware, async (req, res) => {
     }
 });
 
+// get product by id
+router.get('/get-product-by-id/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id).populate('seller');
+        res.send({
+            success: true,
+            data: product
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: error.message
+        })
+    }
+})
+
 // get products
 router.post('/get-products', async (req, res) => {
     try {
