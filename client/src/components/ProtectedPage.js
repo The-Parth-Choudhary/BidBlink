@@ -53,7 +53,7 @@ function ProtectedPage({ children }) {
                             navigate('/profile');
                         }
                         else {
-                            navigate('admin');
+                            navigate('/admin');
                         }
                     }}>
                         {user.name}
