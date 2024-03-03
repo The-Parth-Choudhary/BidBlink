@@ -21,7 +21,7 @@ router.post('/place-new-bid', authMiddleware, async (req, res) => {
 });
 
 // get all bids
-router.get('/get-all-bids', authMiddleware, async (req, res) => {
+router.post('/get-all-bids', authMiddleware, async (req, res) => {
     try {
         const { product, seller } = req.body;
         let filters = {};
