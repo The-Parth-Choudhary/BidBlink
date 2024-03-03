@@ -2,12 +2,14 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SetLoader } from '../../redux/loadersSlice'
 import { GetProductById, GetProducts } from '../../apicalls/products'
-import { message } from 'antd';
+import { Button, message } from 'antd';
 import Divider from '../../components/Divider';
 import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
+import BidModal from './BidModal';
 
 function ProductInfo() {
+    const [showAddNewBid, setShowAddNewBid] = React.useState(false);
     const [product, setProduct] = React.useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -107,8 +109,25 @@ function ProductInfo() {
                             <span>{product.seller.email}</span>
                         </div>
                     </div>
+
+                    <Divider />
+
+                    <div className='flex flex-col'>
+                        <div className="flex justify-between">
+                            <h1 className='text-2xl font-semibold text-primary'>Bids</h1>
+                            <Button onClick={() => {
+                                setShowAddNewBid(true)
+                            }}>Add Bid</Button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {showAddNewBid && <BidModal
+                showBidModal={showAddNewBid}
+                setShowBidModal={setShowAddNewBid}
+                product={product}
+                reloadData={getData}
+            />}
         </div>
     )
 }
