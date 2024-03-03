@@ -30,7 +30,7 @@ const productSchema = mongoose.Schema({
         default: false,
         required: true
     },
-    warrentyAvailable: {
+    warrantyAvailable: {
         type: Boolean,
         default: false,
         required: true

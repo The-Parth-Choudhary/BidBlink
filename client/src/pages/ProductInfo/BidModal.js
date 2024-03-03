@@ -1,15 +1,31 @@
-import { Form, Input, Modal } from 'antd'
+import { Form, Input, Modal, message } from 'antd'
 import React, { useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { SetLoader } from '../../redux/loadersSlice';
+import { PlaceNewBid } from '../../apicalls/products';
 
 function BidModal({ showBidModal, setShowBidModal, product, reloadData }) {
+    const { user } = useSelector((state) => state.users);
     const formRef = useRef(null);
     const rules = [{ required: true, message: 'Required' }]
+    const dispatch = useDispatch();
 
     const onFinish = async (values) => {
         try {
-            
+            dispatch(SetLoader(true));
+            const response = await PlaceNewBid({ ...values, product: product._id, seller: product.seller._id, buyer: user._id });
+            dispatch(SetLoader(false));
+            if (response.success) {
+                message.success(response.message);
+                reloadData();
+                setShowBidModal(false);
+            }
+            else {
+                throw new Error(response.message);
+            }
         } catch (error) {
-            
+            dispatch(SetLoader(false));
+            message.error(error.message);
         }
     }
 
