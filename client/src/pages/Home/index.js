@@ -35,10 +35,6 @@ function Home() {
 
     React.useEffect(() => {
         getData();
-    }, [])
-
-    React.useEffect(() => {
-        console.log(filters);
     }, [filters])
 
     return (

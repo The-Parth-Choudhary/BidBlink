@@ -77,6 +77,10 @@ function ProductInfo() {
                             <span>Rs. {product.price}</span>
                         </div>
                         <div className="flex justify-between mt-2">
+                            <span>Purchased Year</span>
+                            <span>{moment().subtract(product.age, 'years').format('YYYY')} ({product.age} years ago)</span>
+                        </div>
+                        <div className="flex justify-between mt-2">
                             <span>Category</span>
                             <span className='uppercase'>{product.category}</span>
                         </div>

@@ -35,7 +35,7 @@ const ages = [
     },
     {
         name: '9+ years',
-        value: '9+'
+        value: '9-100'
     }
 ]
 
@@ -53,7 +53,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
                     {categories.map((category) => {
                         return (
                             <div className='flex items-center gap-2'>
-                                <input type="checkbox" name="category" className='w-3'
+                                <input type="checkbox" name={category.name} id={category.name} className='w-3'
                                     checked={filters.category.includes(category.value)}
                                     onChange={(e) => {
                                         if (e.target.checked) {
@@ -69,7 +69,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
                                             })
                                         }
                                     }} />
-                                <label htmlFor="category">{category.name}</label>
+                                <label htmlFor={category.name}>{category.name}</label>
                             </div>
                         )
                     })}
@@ -80,7 +80,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
                     {ages.map((age) => {
                         return (
                             <div className='flex items-center gap-2'>
-                                <input type="checkbox" name="age" className='w-3'
+                                <input type="checkbox" name={age.name} id={age.name} className='w-3'
                                     checked={filters.age.includes(age.value)}
                                     onChange={(e) => {
                                         if (e.target.checked) {
@@ -96,7 +96,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
                                             })
                                         }
                                     }} />
-                                <label htmlFor="category">{age.name}</label>
+                                <label htmlFor={age.name}>{age.name}</label>
                             </div>
                         )
                     })}
