@@ -54,11 +54,12 @@ router.post('/get-products', async (req, res) => {
         }
         // filter by age
         if (age.length > 0) {
-            age.forEach((item) => {
+            const ageFilters = age.map((item) => {
                 const fromAge = item.split('-')[0];
                 const toAge = item.split('-')[1];
-                filters.age = { $gte: fromAge, $lte: toAge }
+                return { age: { $gte: fromAge, $lte: toAge } };
             });
+            filters.$or = ageFilters;
         }
 
         const products = await Product.find(filters).populate('seller').sort({ createdAt: -1 });

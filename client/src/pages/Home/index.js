@@ -38,13 +38,16 @@ function Home() {
     }, [filters])
 
     return (
-        <div className='flex gap-5'>
+        <div className='flex gap-5 h-screen'>
             {showFilters && <Filters
                 showFilters={showFilters}
                 setShowFilters={setShowFilters}
                 filters={filters}
                 setFilters={setFilters}
             />}
+
+            {showFilters && <div className='border border-solid border-gray-400 h-auto'></div>}
+
             <div className='flex flex-col gap-5 w-full'>
                 <div className="flex gap-5 items-center">
                     {!showFilters && <i className="ri-equalizer-fill cursor-pointer text-2xl" onClick={() => setShowFilters(!showFilters)}></i>}
@@ -55,10 +58,11 @@ function Home() {
                         return <div className='border border-gray-300 rounded border-solid flex flex-col gap-5 pb-2 cursor-pointer' onClick={() => {
                             navigate(`/product/${product._id}`)
                         }}>
-                            <img src={product.images[0]} className='w-full h-40 object-cover' alt="" />
+                            <img src={product.images[0]} className='w-full h-40' alt="" />
                             <div className="px-2 flex flex-col gap-1">
-                                <h1 className='text-lg font-semibold'>{product.name}</h1>
-                                <p className='text-sm'>{product.description}</p>
+                                <h1 className='text-lg font-semibold uppercase'>{product.name}</h1>
+                                <p className='text-sm uppercase'>{product.category}</p>
+                                <p className='text-sm'>{product.age}{' '}{product.age === 1 ? 'year' : 'years'}{' old'}</p>
                                 <Divider />
                                 <span className='text-xl font-semibold text-green-700'>
                                     Rs. {product.price}

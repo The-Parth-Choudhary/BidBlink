@@ -30,8 +30,8 @@ const ages = [
         value: '3-5'
     },
     {
-        name: '5-8 years',
-        value: '5-8'
+        name: '6-8 years',
+        value: '6-8'
     },
     {
         name: '9+ years',
@@ -49,7 +49,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
 
             <div className="flex flex-col gap-1 mt-5">
                 <h1 className='text-gray-600'>Categories</h1>
-                <div className='flex flex-col gap-1'>
+                <div className='flex flex-col'>
                     {categories.map((category) => {
                         return (
                             <div className='flex items-center gap-2'>
@@ -75,8 +75,8 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
                     })}
                 </div>
 
-                <h1 className='text-gray-600'>Ages</h1>
-                <div className='flex flex-col gap-1'>
+                <h1 className='text-gray-600 mt-5'>Ages</h1>
+                <div className='flex flex-col'>
                     {ages.map((age) => {
                         return (
                             <div className='flex items-center gap-2'>

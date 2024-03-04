@@ -137,7 +137,7 @@ function ProductForm({ showProductForm, setShowProductForm, selectedProduct, get
                                     })
                                 }}
                                     checked={formRef.current?.getFieldValue('showBidsOnProduct')}
-                                    style={{ width: 50, marginLeft: 25 }} />
+                                    style={{ width: 50, marginLeft: 25 }} defaultChecked />
                             </Form.Item>
                         </Form>
                     </Tabs.TabPane>

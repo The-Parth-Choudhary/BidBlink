@@ -53,8 +53,11 @@ function Products() {
             dataIndex: 'name'
         },
         {
-            title: 'Description',
-            dataIndex: 'description'
+            title: 'Product',
+            dataIndex: 'image',
+            render: (text, record) => {
+                return <img className='w-20 h-20 object-cover rounded-md' src={record?.images?.length > 0 ? record.images[0] : ''} />
+            }
         },
         {
             title: 'Price',

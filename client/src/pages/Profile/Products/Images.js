@@ -71,7 +71,7 @@ function Images({ selectedProduct, setShowProductForm, getData }) {
             <Upload listType='picture' beforeUpload={() => false} onChange={(info) => {
                 setFile(info.file);
                 setShowPreview(true);
-            }} showUploadList={showPreview}>
+            }} showUploadList={showPreview} fileList={file ? [file] : []}>
 
                 <Button type='dashed'>Upload Image</Button>
             </Upload>
