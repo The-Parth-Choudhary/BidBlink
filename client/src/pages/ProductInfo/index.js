@@ -47,7 +47,7 @@ function ProductInfo() {
                             return (
                                 <img className={
                                     'w-20 h-20 object-cover rounded-md cursor-pointer ' + (selectedImageIndex === index
-                                        ? 'border-2 border-green-700 border-dashed p-2' : '')
+                                        ? 'border-2 border-green-700 border-dashed p-1' : '')
                                 } src={image} alt='' onClick={() => { setSelectedImageIndex(index) }} />
                             )
                         })}
