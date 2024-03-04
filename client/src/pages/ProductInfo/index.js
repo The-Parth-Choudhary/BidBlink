@@ -115,12 +115,30 @@ function ProductInfo() {
                     <Divider />
 
                     <div className='flex flex-col'>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between mb-5">
                             <h1 className='text-2xl font-semibold text-primary'>Bids</h1>
                             <Button onClick={() => { setShowAddNewBid(true) }}
-                                disabled={user._id === product.seller._id}
-                            >Add Bid</Button>
+                                disabled={user._id === product.seller._id}>
+                                Add Bid
+                            </Button>
                         </div>
+
+                        {product.showBidsOnProduct && product.bids.map((bid) => {
+                            return <div className='border border-gray-300 border-solid p-3 rounded'>
+                                <div className="flex justify-between text-gray-700">
+                                    <span>Name</span>
+                                    <span>{bid.buyer.name}</span>
+                                </div>
+                                <div className="flex justify-between text-gray-600">
+                                    <span>Bid Amount</span>
+                                    <span>Rs. {bid.bidAmount}</span>
+                                </div>
+                                <div className="flex justify-between text-gray-600">
+                                    <span>BId Place On</span>
+                                    <span>{moment(bid.createdAt).format('D MMM, YY, hh:mm A')}</span>
+                                </div>
+                            </div>
+                        })}
                     </div>
                 </div>
             </div>

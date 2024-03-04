@@ -129,6 +129,16 @@ function ProductForm({ showProductForm, setShowProductForm, selectedProduct, get
                                     </Form.Item>
                                 ))}
                             </div>
+
+                            <Form.Item label='Show Bids on Product' name='showBidsOnProduct' valuePropName='checked'>
+                                <Input type='checkbox' onChange={(e) => {
+                                    formRef.current.setFieldsValue({
+                                        showBidsOnProduct: e.target.checked
+                                    })
+                                }}
+                                    checked={formRef.current?.getFieldValue('showBidsOnProduct')}
+                                    style={{ width: 50, marginLeft: 25 }} />
+                            </Form.Item>
                         </Form>
                     </Tabs.TabPane>
                     <Tabs.TabPane tab='Images' key='2' disabled={!selectedProduct}>
