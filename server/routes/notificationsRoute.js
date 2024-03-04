@@ -3,7 +3,7 @@ const authmiddleware = require('../middlewares/authMiddleware');
 const Notification = require('../models/notificationsModal');
 
 // add a notification
-router.post('notify', authmiddleware, async (req, res) => {
+router.post('/notify', authmiddleware, async (req, res) => {
     try {
         const newNotification = new Notification(req.body);
         await newNotification.save();
@@ -22,7 +22,7 @@ router.post('notify', authmiddleware, async (req, res) => {
 // get all notification by user id
 router.get('/get-all-notifications', authmiddleware, async (req, res) => {
     try {
-        const notifications = await Notification.find({ user: req.body.userid }).sort({ createdAt: -1 })
+        const notifications = await Notification.find({ user: req.body.userId }).sort({ createdAt: -1 })
         res.send({
             success: true,
             data: notifications
@@ -54,7 +54,11 @@ router.delete('/delete-notification/:id', authmiddleware, async (req, res) => {
 // read all notifications
 router.put('/read-all-notifications', authmiddleware, async (req, res) => {
     try {
-        await Notification.updateMany({ user: req.body.userid, read: false }, { $set: { read: true } })
+        await Notification.updateMany({ user: req.body.userId, read: false }, { $set: { read: true } })
+        res.send({
+            success: true,
+            message: 'All notifications are marked as read'
+        })
     } catch (error) {
         res.send({
             success: false,

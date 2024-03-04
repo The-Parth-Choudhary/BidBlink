@@ -3,6 +3,7 @@ import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { SetLoader } from '../../redux/loadersSlice';
 import { PlaceNewBid } from '../../apicalls/products';
+import { AddNotification } from '../../apicalls/notifications';
 
 function BidModal({ showBidModal, setShowBidModal, product, reloadData }) {
     const { user } = useSelector((state) => state.users);
@@ -17,6 +18,15 @@ function BidModal({ showBidModal, setShowBidModal, product, reloadData }) {
             dispatch(SetLoader(false));
             if (response.success) {
                 message.success(response.message);
+
+                // send notification
+                await AddNotification({
+                    title: 'A new bid has been placed',
+                    message: `A new bid has been placed on you product ${product.name} by ${user.name} for Rs. ${values.bidAmount}`,
+                    user: product.seller._id,
+                    onclick: '/profile'
+                })
+
                 reloadData();
                 setShowBidModal(false);
             }
@@ -36,7 +46,7 @@ function BidModal({ showBidModal, setShowBidModal, product, reloadData }) {
 
                 <Form layout='vertical' ref={formRef} onFinish={onFinish}>
                     <Form.Item label='Bid Amount' name='bidAmount' rules={rules}>
-                        <Input />
+                        <Input type='number' />
                     </Form.Item>
                     <Form.Item label='Message' name='message' rules={rules}>
                         <Input.TextArea />

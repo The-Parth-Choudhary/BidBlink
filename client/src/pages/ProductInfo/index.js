@@ -128,7 +128,7 @@ function ProductInfo() {
                         </div>
 
                         {product.showBidsOnProduct && product.bids.map((bid) => {
-                            return <div className='border border-gray-300 border-solid p-3 rounded'>
+                            return <div className=' p-3 rounded'>
                                 <div className="flex justify-between text-gray-700">
                                     <span>Name</span>
                                     <span>{bid.buyer.name}</span>
@@ -141,6 +141,7 @@ function ProductInfo() {
                                     <span>BId Place On</span>
                                     <span>{moment(bid.createdAt).format('D MMM, YY, hh:mm A')}</span>
                                 </div>
+                                <Divider />
                             </div>
                         })}
                     </div>
