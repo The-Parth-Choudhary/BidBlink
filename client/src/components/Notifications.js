@@ -18,7 +18,7 @@ function Notifications({ notifications, reloadNotifications, showNotifications, 
             if (response.success) {
                 reloadNotifications();
                 dispatch(SetLoader(false));
-                message.success(response.success);
+                message.success(response.message);
             }
             else {
                 throw new Error(response.message);
@@ -34,23 +34,23 @@ function Notifications({ notifications, reloadNotifications, showNotifications, 
             <div className='flex flex-col gap-2'>
                 {notifications.length > 0 ? notifications.map((notification) => {
                     return (
-                <div className='flex flex-col gap-2 border border-solid border-gray-300 rounded p-2 cursor-pointer'
-                    key={notification._id}>
-                    <div className="flex justify-between">
-                        <div onClick={() => {
-                            navigate(notification.onclick);
-                            setShowNotifications(false);
-                        }}>
-                            <h1>{notification.title}</h1>
-                            <span>{notification.message}</span>
-                            <h1 className='text-gray-500 text-sm'>{moment(notification.createdAt).fromNow()}</h1>
+                        <div className='flex flex-col gap-2 border border-solid border-gray-300 rounded p-2 cursor-pointer'
+                            key={notification._id}>
+                            <div className="flex justify-between">
+                                <div onClick={() => {
+                                    navigate(notification.onclick);
+                                    setShowNotifications(false);
+                                }}>
+                                    <h1>{notification.title}</h1>
+                                    <span>{notification.message}</span>
+                                    <h1 className='text-gray-500 text-sm'>{moment(notification.createdAt).fromNow()}</h1>
+                                </div>
+                                <i className="ri-delete-bin-line cursor-pointer flex items-center" onClick={() => {
+                                    deleteCurrNotification(notification._id);
+                                }}></i>
+                            </div>
                         </div>
-                        <i className="ri-delete-bin-line cursor-pointer" onClick={() => {
-                            deleteCurrNotification(notification._id);
-                        }}></i>
-                    </div>
-                </div>
-                )
+                    )
                 }) : <div><h1 className='text-gray-600'>No new Notification</h1></div>}
             </div>
         </Modal>
