@@ -47,3 +47,12 @@ export const UpdateUserStatus = async (id, status) => {
         return error.message
     }
 }
+
+export const UpdatePassword = async (id, payload) => {
+    try {
+        const response = await axiosInstance.put(`/api/users/update-password/${id}`, payload);
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}

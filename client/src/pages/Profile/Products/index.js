@@ -61,7 +61,10 @@ function Products() {
         },
         {
             title: 'Price',
-            dataIndex: 'price'
+            dataIndex: 'price',
+            render: (text, render) => {
+                return 'Rs. ' + text;
+            }
         },
         {
             title: 'Category',

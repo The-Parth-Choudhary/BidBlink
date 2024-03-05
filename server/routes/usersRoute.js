@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
         }
 
         // if user is active
-        if(user.status !== 'active'){
+        if (user.status !== 'active') {
             throw new Error('User is account is blocked, please contact the admin');
         }
 
@@ -115,6 +115,39 @@ router.put('/update-user-status/:id', authMiddleware, async (req, res) => {
         res.send({
             success: true,
             message: 'User status updated successfully'
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: error.message
+        })
+    }
+})
+
+// change password
+router.put('/update-password/:id', authMiddleware, async (req, res) => {
+    try {
+        const user = await User.findById(req.body.userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        const validPassword = await bcrypt.compare(req.body.oldPassword, user.password);
+        if (!validPassword) {
+            throw new Error('Invalid old password');
+        }
+
+        if (req.body.newPassword !== req.body.reenterNewPassword) {
+            throw new Error('Password does not match');
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.newPassword, salt);
+        await User.findOneAndUpdate({ _id: req.params.id }, { password: hashedPassword });
+
+        res.send({
+            success: true,
+            message: 'Password updated successfully'
         })
     } catch (error) {
         res.send({
