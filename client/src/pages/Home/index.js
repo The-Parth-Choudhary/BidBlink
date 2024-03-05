@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SetLoader } from '../../redux/loadersSlice'
 import { GetProducts } from '../../apicalls/products'
-import { message } from 'antd';
+import { Form, message } from 'antd';
 import Divider from '../../components/Divider';
 import { useNavigate } from 'react-router-dom';
 import Filters from './Filters';
@@ -16,8 +16,10 @@ function Home() {
     const [filters, setFilters] = React.useState({
         status: 'approved',
         category: [],
-        age: []
+        age: [],
+        search: ''
     })
+    const [searchQuery, setSearchQuery] = React.useState('');
 
     const getData = async () => {
         try {
@@ -31,6 +33,10 @@ function Home() {
             dispatch(SetLoader(false));
             message.error(error.message);
         }
+    }
+
+    const onFinish = () => {
+        setFilters({ ...filters, search: searchQuery });
     }
 
     React.useEffect(() => {
@@ -51,7 +57,18 @@ function Home() {
             <div className='flex flex-col gap-5 w-full'>
                 <div className="flex gap-5 items-center">
                     {!showFilters && <i className="ri-equalizer-fill cursor-pointer text-2xl" onClick={() => setShowFilters(!showFilters)}></i>}
-                    <input type="text" placeholder='Search' className='border border-gray-300 border-solid rounded p-2' />
+                    <Form className='flex items-center w-full border border-gray-300 border-solid rounded px-4 h-14' onFinish={onFinish}>
+                        <input type="text" placeholder='Search' className='border-none focus:border-none'
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value)
+                                if (e.target.value.trim().length === 0) {
+                                    setSearchQuery('');
+                                    onFinish();
+                                }
+                            }}
+                        />
+                        <i class="ri-search-line cursor-pointer" onClick={onFinish}></i>
+                    </Form>
                 </div>
                 <div className={`grid gap-3 ${showFilters ? 'grid-cols-4' : 'grid-cols-5'}`}>
                     {products?.map((product) => {

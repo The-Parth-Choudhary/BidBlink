@@ -55,7 +55,7 @@ router.get('/get-product-by-id/:id', async (req, res) => {
 // get products
 router.post('/get-products', async (req, res) => {
     try {
-        const { seller, category = [], age = [], status } = req.body;
+        const { seller, category = [], age = [], search = '', status } = req.body;
         let filters = {};
         if (seller) {
             filters.seller = seller;
@@ -77,6 +77,11 @@ router.post('/get-products', async (req, res) => {
             filters.$or = ageFilters;
         }
 
+        if (search.length !== 0) {
+            filters.name = { $regex: search, $options: 'i' };
+        }else{
+            delete filters.name;
+        }
         const products = await Product.find(filters).populate('seller').sort({ createdAt: -1 });
         res.send({
             success: true,
