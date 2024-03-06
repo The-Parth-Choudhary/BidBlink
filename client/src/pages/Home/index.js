@@ -35,8 +35,13 @@ function Home() {
         }
     }
 
-    const onFinish = () => {
-        setFilters({ ...filters, search: searchQuery });
+    const onFinish = (searchQueryParam) => {
+        if(searchQueryParam && searchQueryParam === 'empty'){
+            setFilters({ ...filters, search: '' });
+        }
+        else{
+            setFilters({ ...filters, search: searchQuery });
+        }
     }
 
     React.useEffect(() => {
@@ -62,8 +67,7 @@ function Home() {
                             onChange={(e) => {
                                 setSearchQuery(e.target.value)
                                 if (e.target.value.trim().length === 0) {
-                                    setSearchQuery('');
-                                    onFinish();
+                                    onFinish('empty');
                                 }
                             }}
                         />
