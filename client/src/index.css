@@ -5,7 +5,7 @@
 /* font */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,28 +13,48 @@
     font-size: 15px;
 }
 
-input, select, textarea{
+body {
+    background-color: #EEF9EE;
+}
+
+input,
+select,
+textarea {
     min-height: 45px !important;
     border: 1px solid #b9b9b9;
     width: 100%;
 }
 
-input:focus, textarea:focus, select:focus{
+input:focus,
+textarea:focus,
+select:focus {
     outline: none !important;
     border: 1px solid #6a6a6a;
     box-shadow: none !important;
 }
 
-button{
+button {
     height: 45px;
     box-shadow: none !important;
 }
 
-table{
+table {
     border: #a1a1a1 1px solid;
     border-radius: 2px;
 }
 
-i{
+i {
     font-size: 20px;
+}
+
+.bg-main {
+    background-color: #EEF9EE;
+}
+
+.bg-card {
+    background-color: #FCFEFC;
+}
+
+.text-main {
+    color: #1F8B59;
 }

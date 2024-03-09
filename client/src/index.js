@@ -14,14 +14,14 @@ root.render(
             theme={{
                 components: {
                     Button: {
-                        colorPrimary: '#40513b',
-                        colorPrimaryHover: '#40513b',
-                        borderRadius: '0px',
+                        colorPrimary: '#1F8B59',
+                        colorPrimaryHover: '#1F8B59',
+                        borderRadius: '2px'
                     }
                 },
                 token: {
                     borderRadius: '2px',
-                    colorPrimary: '#40513b'
+                    colorPrimary: '#2d6a4f'
                 }
             }}>
             <App />

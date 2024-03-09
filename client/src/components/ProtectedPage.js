@@ -80,7 +80,7 @@ function ProtectedPage({ children }) {
                 <h1 className="text-2xl text-white cursor-pointer" onClick={() => { navigate('/') }}>BidBlink</h1>
 
                 <div className='bg-white py-2 px-5 rounded flex gap-5'>
-                    <span className='cursor-pointer uppercase' onClick={() => {
+                    <span className='cursor-pointer uppercase text-main' onClick={() => {
                         if (user.role === 'user') {
                             navigate('/profile');
                         }
@@ -88,7 +88,7 @@ function ProtectedPage({ children }) {
                             navigate('/admin');
                         }
                     }}>
-                        {user.name}
+                        <b>{user.name}</b>
                     </span>
 
                     <Badge size='small' count={notifications?.filter((notification) => !notification.read).length}
@@ -96,10 +96,10 @@ function ProtectedPage({ children }) {
                             readNotifications();
                             setShowNotifications(true)
                         }}>
-                        <i class="ri-notification-2-line cursor-pointer"></i>
+                        <i class="ri-notification-2-line cursor-pointer text-yellow-600"></i>
                     </Badge>
 
-                    <i className="ri-logout-box-r-line cursor-pointer" onClick={() => {
+                    <i className="ri-logout-box-r-line cursor-pointer text-red-600" onClick={() => {
                         localStorage.removeItem('token');
                         navigate('/login');
                     }}></i>

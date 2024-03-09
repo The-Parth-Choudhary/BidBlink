@@ -76,7 +76,19 @@ function Products() {
         },
         {
             title: 'Status',
-            dataIndex: 'status'
+            dataIndex: 'status',
+            render: (text, record) => {
+                let color;
+                if (text === 'pending') color = '#bebe00'
+                else if (text === 'approved') color = 'green'
+                else color = 'red'
+                return {
+                    props: {
+                        style: { color: color, fontWeight: 500 }
+                    },
+                    children: text.toUpperCase()
+                };
+            }
         },
         {
             title: 'Added on',
@@ -89,14 +101,14 @@ function Products() {
             render: (text, record) => {
                 return (
                     <div className="flex gap-5 items-center">
-                        <i className="ri-delete-bin-line cursor-pointer" onClick={() => {
+                        <i className="ri-delete-bin-line cursor-pointer text-red-600" onClick={() => {
                             deleteProduct(record._id);
                         }}></i>
-                        <i className="ri-pencil-line cursor-pointer" onClick={() => {
+                        <i className="ri-pencil-line cursor-pointer text-blue-600" onClick={() => {
                             setSelectedProduct(record);
                             setShowProductForm(true);
                         }}></i>
-                        <span className="underline cursor-pointer" onClick={() => {
+                        <span className="cursor-pointer text-green-600" onClick={() => {
                             setSelectedProduct(record);
                             setShowBids(true);
                         }}>Show Bids</span>

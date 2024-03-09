@@ -13,7 +13,7 @@ function App() {
     const { loading } = useSelector(state => state.loaders);
 
     return (
-        <div>
+        <div className="bg-main">
             {loading && <Spinner />}
             <BrowserRouter>
                 <Routes>

@@ -53,7 +53,7 @@ function Filters({ showFilters, setShowFilters, filters, setFilters }) {
                     {categories.map((category) => {
                         return (
                             <div className='flex items-center gap-2'>
-                                <input type="checkbox" name={category.name} id={category.name} className='w-3'
+                                <input type="checkbox" name={category.name} id={category.name} className='w-3 text-main'
                                     checked={filters.category.includes(category.value)}
                                     onChange={(e) => {
                                         if (e.target.checked) {

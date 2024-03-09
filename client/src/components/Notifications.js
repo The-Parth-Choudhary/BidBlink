@@ -45,7 +45,7 @@ function Notifications({ notifications, reloadNotifications, showNotifications, 
                                     <span>{notification.message}</span>
                                     <h1 className='text-gray-500 text-sm'>{moment(notification.createdAt).fromNow()}</h1>
                                 </div>
-                                <i className="ri-delete-bin-line cursor-pointer flex items-center" onClick={() => {
+                                <i className="ri-delete-bin-line cursor-pointer flex items-center text-red-600" onClick={() => {
                                     deleteCurrNotification(notification._id);
                                 }}></i>
                             </div>

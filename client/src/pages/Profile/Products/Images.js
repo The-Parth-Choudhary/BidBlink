@@ -60,11 +60,10 @@ function Images({ selectedProduct, setShowProductForm, getData }) {
         <div>
             <div className="flex gap-5 mb-5">
                 {images.map((image) => {
-                    return <div className='flex gap-2 border-solid border-gray-500 rounded p-2 items-end'>
-                        <img className='h-20 w-20 object-cover' src={image} alt="" />
-                        <i className="ri-delete-bin-line cursor-pointer" onClick={() => {
+                    return <div className='flex gap-2 border-solid border-2 border-gray-600 rounded'>
+                        <img className='h-20 w-20 object-cover cursor-pointer rounded' src={image} alt="" onClick={()=>{
                             deleteImage(image);
-                        }}></i>
+                        }} />
                     </div>
                 })}
             </div>

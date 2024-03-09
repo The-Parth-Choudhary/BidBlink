@@ -49,7 +49,7 @@ function Home() {
     }, [filters])
 
     return (
-        <div className='flex gap-5 h-screen'>
+        <div className='flex gap-5 h-screen bg-main'>
             {showFilters && <Filters
                 showFilters={showFilters}
                 setShowFilters={setShowFilters}
@@ -63,7 +63,7 @@ function Home() {
                 <div className="flex gap-5 items-center">
                     {!showFilters && <i className="ri-equalizer-fill cursor-pointer text-2xl" onClick={() => setShowFilters(!showFilters)}></i>}
                     <Form className='flex items-center w-full border border-gray-300 border-solid rounded px-4 h-14' onFinish={onFinish}>
-                        <input type="text" placeholder='Search' className='border-none focus:border-none'
+                        <input type="text" placeholder='Search' className='border-none focus:border-none bg-main'
                             onChange={(e) => {
                                 setSearchQuery(e.target.value)
                                 if (e.target.value.trim().length === 0) {
@@ -71,12 +71,12 @@ function Home() {
                                 }
                             }}
                         />
-                        <i class="ri-search-line cursor-pointer" onClick={onFinish}></i>
+                        <i class="ri-search-line cursor-pointer text-main" onClick={onFinish}></i>
                     </Form>
                 </div>
                 <div className={`grid gap-3 ${showFilters ? 'grid-cols-4' : 'grid-cols-5'}`}>
                     {products?.map((product) => {
-                        return <div className='border border-gray-300 rounded border-solid flex flex-col gap-5 pb-2 cursor-pointer' onClick={() => {
+                        return <div className='border bg-card border-gray-300 rounded border-solid flex flex-col gap-5 pb-2 cursor-pointer' onClick={() => {
                             navigate(`/product/${product._id}`)
                         }}>
                             <img src={product.images[0]} className='w-full h-40' alt="" />
