@@ -1,5 +1,5 @@
-import cron from "cron";
-import https from "https";
+const cron = require("cron");
+const https = require("https");
 
 const URL = "https://bidblink.onrender.com/login";
 
