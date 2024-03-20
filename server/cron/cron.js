@@ -17,4 +17,4 @@ const job = new cron.CronJob("*/15 * * * *", function () {
         });
 });
 
-export default job;
+module.exports = job;
